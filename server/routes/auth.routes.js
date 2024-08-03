@@ -6,6 +6,7 @@ import {
     register,
     verifyToken,
     getAllFuncionarios,
+    updateFuncionario,
     deleteFuncionario
 } from "../controllers/auth.controller.js"; // Importando los controladores de autenticación
 
@@ -24,16 +25,18 @@ router.post(
     validateSchema(registerSchema), 
     register);
 
-router.post("/login", validateSchema(loginSchema), login); // Ruta para iniciar sesión
+router.post("/login", validateSchema(loginSchema), login);
 
-router.post("/logout", logout); // Ruta para cerrar sesión
+router.post("/logout", logout);
 
-router.get("/profile", authRequired, profile); // Ruta para obtener el perfil del funcionario
+router.get("/profile", authRequired, profile);
 
-router.get("/verify", verifyToken); // Ruta para verificar el token
+router.get("/verify", verifyToken);
 
-router.get("/funcionarios/todos", getAllFuncionarios); // Ruta para obtener todos los funcionarios
+router.get("/funcionarios/todos", getAllFuncionarios);
 
-router.delete("/funcionarios/:id", deleteFuncionario); // Ruta para eliminar un funcionario
+router.put("/funcionarios/:id", updateFuncionario);
+
+router.delete("/funcionarios/:id", deleteFuncionario);
 
 export { router }; 

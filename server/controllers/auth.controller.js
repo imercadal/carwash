@@ -145,6 +145,18 @@ export const getAllFuncionarios = async (req, res) => {
     }
 }
 
+export const updateFuncionario = async (req, res) => {
+    try{
+        const staff = await Funcionario.findByIdAndUpdate(req.params.id);
+        res.status(200).json(staff);
+    } catch (error) {
+        console.log("Error" + error.message);
+        res.status(400).json({
+            message: error.message,
+        });
+    }
+}
+
 export const deleteFuncionario = async (req, res) => {
     try {
         const funcionario = await Funcionario.findByIdAndDelete(req.params.id);

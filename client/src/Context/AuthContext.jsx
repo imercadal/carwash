@@ -2,9 +2,11 @@ import { createContext, useState, useContext, useEffect } from "react";
 import {
     registerRequest,
     loginRequest,
-    verifyTokenRequet,
+    verifyTokenRequest,
     getFuncionarioByIdRequest,
-    getAllFuncionariosRequest
+    getAllFuncionariosRequest,
+    updateFuncionarioRequest,
+    deleteFuncionarioRequest
 } from "../api/auth.js";
 
 import Cookies from "js-cookie";
@@ -26,24 +28,24 @@ export const AuthProvider = ({ children }) => {
 
     const signup = async (funcionario) => {
         try {
-        const res = await registerRequest(funcionario);
-        console.log(res.data);
-        setFuncionario(res.data);
-        setIsAuthenticated(true);
+            const res = await registerRequest(funcionario);
+            console.log(res.data);
+            setFuncionario(res.data);
+            setIsAuthenticated(true);
         } catch (error) {
-        // console.log(error.response);
-        setErrors(error.response.data);
+            // console.log(error.response);
+            setErrors(error.response.data);
         }
     };
 
     const signin = async (funcionario) => {
         try {
-        const res = await loginRequest(funcionario);
-        console.log(res);
-        setFuncionario(res.data);
-        setIsAuthenticated(true);
+            const res = await loginRequest(funcionario);
+            console.log(res);
+            setFuncionario(res.data);
+            setIsAuthenticated(true);
         } catch (error) {
-        setErrors(error.response.data);
+            setErrors(error.response.data);
         }
     };
 
@@ -55,11 +57,11 @@ export const AuthProvider = ({ children }) => {
 
     const getFuncionarioById = async (funcionarioId) => {
         try {
-        const res = await getFuncionarioByIdRequest(funcionarioId);
-        return res.data; 
+            const res = await getFuncionarioByIdRequest(funcionarioId);
+            return res.data; 
         } catch (error) {
-        console.error("Error fetching funcionario by ID:", error);
-        return null;
+            console.error("Error fetching funcionario by ID:", error);
+            return null;
         }
     };
 
@@ -72,6 +74,26 @@ export const AuthProvider = ({ children }) => {
         return [];
         }
     };
+
+    const updateFuncionario = async (funcionarioId, updatedData) => {
+        try {
+            const res = await updateFuncionarioRequest(funcionarioId, updatedData);
+            return res.data;
+        } catch (error) {
+            console.error("Error al actualizar los datos del funcionario(a)", error);
+            setErrors(error.response.data);
+        }
+    }
+
+    const deleteFuncionario = async (funcionarioId) => {
+        try {
+            const res = await deleteFuncionarioRequest(funcionarioId);
+            return res.data;
+        } catch (error) {
+            console.error("Error al eliminar funcinoario(a)", error);
+            setErrors(error.response.data)
+        }
+    }
 
     useEffect(() => {
         if (errors.length > 0) {
@@ -93,7 +115,7 @@ export const AuthProvider = ({ children }) => {
         }
 
         try {
-            const res = await verifyTokenRequet(cookies.token);
+            const res = await verifyTokenRequest(cookies.token);
             if (!res.data) {
             setIsAuthenticated(false);
             setLoading(false);
@@ -122,7 +144,10 @@ export const AuthProvider = ({ children }) => {
             isAuthenticated,
             errors,
             logout,
-            getFuncionarioById
+            getFuncionarioById,
+            getAllFuncionarios,
+            updateFuncionario,
+            deleteFuncionario
         }}
         >
         {children}
