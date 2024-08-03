@@ -60,10 +60,14 @@ const Navbar = (props) => {
         navigate("/perfil");
     }
 
+    const irAlInicio = () => {
+        navigate('/');
+    }
+
     return (
     <AppBar position="static" sx={{ backgroundColor: "#33489E", width: "100%"}}>
             <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
-                <Box sx={{display: "flex", alignItems: "center"}}>
+                <Box sx={{display: "flex", alignItems: "center", cursor: "pointer" }} onClick={ irAlInicio }>
                     <img src={logoBlanco} alt="logo" className="logo" height={50}/>
                     <Typography variant="h4" component="div" sx={{ flexGrow: 1, fontWeight: "500",color: "whitesmoke", fontFamily: "Roots" }}>
                         LavAutos

@@ -9,6 +9,8 @@ import {
     Input
 } from "@mui/material";
 import Layout from "../../layout";
+import Navbar from '../../components/Navbar';
+
 
 
 const RegistrarCliente = () => {
@@ -28,6 +30,8 @@ const RegistrarCliente = () => {
     });
 
     return (
+        <>
+        <Navbar/>
         <Layout>
         <Paper variant="elevation" elevation={3} sx={{
             backgroundColor: "primary.main",
@@ -172,6 +176,7 @@ const RegistrarCliente = () => {
         </Paper>
         <Paper/>
         </Layout>
+        </>
     );
 };
 

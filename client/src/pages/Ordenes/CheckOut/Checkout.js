@@ -28,7 +28,7 @@ import InfoMobile from './InfoMobile';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 import logo from '../../../assets/logo/Logo_LavAutos.png';
-import Navbar from '../../../components/Navbar/Navbar';
+import Navbar from '../../../components/Navbar';
 
 
 const steps = ['Tus datos', 'Datos de pago', 'Revisa tu orden'];

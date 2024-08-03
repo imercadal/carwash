@@ -1,5 +1,5 @@
 import axios from "axios";
-import Layout from "../../layout";
+import Navbar from '../../components/Navbar';
 import * as React from 'react';
 import { 
     Avatar,
@@ -113,6 +113,8 @@ export default function RegistroOrden () {
   };
   
   return (
+    <>
+      <Navbar/>
       <Container component="main" maxWidth="md">
             <CssBaseline />
             <Box
@@ -196,6 +198,7 @@ export default function RegistroOrden () {
       </div>    
         </Box>
         </Container>
+    </>
   );
 };
 
